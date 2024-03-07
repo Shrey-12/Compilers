@@ -1,0 +1,18 @@
+digit [0-9]
+letter [A-Za-z]
+%{
+#include<stdio.h>
+#include<string.h>
+int count=0;
+%}
+%%
+{letter}({letter}|{digit})* { count++; }
+%%
+int yywrap(void) {
+    return 1;
+} 
+int main(void) {
+ yylex();
+ printf("number of identifiers = %d\n", count);
+ return 0;
+} 
