@@ -9,6 +9,7 @@ SELECT          return SELECT;
 FROM            return FROM;
 AND			    return AND;
 UPDATE			return UPDATE;
+TRUNCATE        return TRUNCATE;
 SET   			return SET;
 VALUES 		    return VALUES;
 DROP 			return DROP;

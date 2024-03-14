@@ -67,25 +67,15 @@
 
 
 /* First part of user prologue.  */
-#line 1 "sql.y"
+#line 1 "eng2sql.y"
 
 #include <stdio.h>
+#include <stdlib.h>
+extern int yylex();
+void yyerror(const char *s);
+int yywrap(){return 1;}
 
-void yyerror(const char *str) {
-    fprintf(stderr, "error: %s\n", str);
-}
-int yyparse(void);
-int yylex(void);
-
-int yywrap() {
-    return 1;
-}
-
-int main() {
-    yyparse();
-}
-
-#line 89 "y.tab.c"
+#line 79 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -129,21 +119,30 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    SELECT = 258,                  /* SELECT  */
-    FROM = 259,                    /* FROM  */
-    ID = 260,                      /* ID  */
-    WHERE = 261,                   /* WHERE  */
-    AND = 262,                     /* AND  */
-    UPDATE = 263,                  /* UPDATE  */
-    SET = 264,                     /* SET  */
-    VALUES = 265,                  /* VALUES  */
-    DELETE = 266,                  /* DELETE  */
-    DROP = 267,                    /* DROP  */
-    DATABASE = 268,                /* DATABASE  */
-    CREATE = 269,                  /* CREATE  */
-    TABLE = 270,                   /* TABLE  */
-    EQUAL = 271,                   /* EQUAL  */
-    TRUNCATE = 272                 /* TRUNCATE  */
+    PLZ = 258,                     /* PLZ  */
+    GIVE = 259,                    /* GIVE  */
+    ME = 260,                      /* ME  */
+    ALL = 261,                     /* ALL  */
+    INFO = 262,                    /* INFO  */
+    THE = 263,                     /* THE  */
+    OF = 264,                      /* OF  */
+    AND = 265,                     /* AND  */
+    TO = 266,                      /* TO  */
+    STUDENTS = 267,                /* STUDENTS  */
+    NAME = 268,                    /* NAME  */
+    WHOSE = 269,                   /* WHOSE  */
+    CPI = 270,                     /* CPI  */
+    IS = 271,                      /* IS  */
+    MORE = 272,                    /* MORE  */
+    THAN = 273,                    /* THAN  */
+    UPDATE = 274,                  /* UPDATE  */
+    SET = 275,                     /* SET  */
+    EQUAL = 276,                   /* EQUAL  */
+    WHERE = 277,                   /* WHERE  */
+    HAVING = 278,                  /* HAVING  */
+    ROLL = 279,                    /* ROLL  */
+    NUMBER_VAL = 280,              /* NUMBER_VAL  */
+    FULLSTOP = 281                 /* FULLSTOP  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -152,25 +151,43 @@ extern int yydebug;
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
-#define SELECT 258
-#define FROM 259
-#define ID 260
-#define WHERE 261
-#define AND 262
-#define UPDATE 263
-#define SET 264
-#define VALUES 265
-#define DELETE 266
-#define DROP 267
-#define DATABASE 268
-#define CREATE 269
-#define TABLE 270
-#define EQUAL 271
-#define TRUNCATE 272
+#define PLZ 258
+#define GIVE 259
+#define ME 260
+#define ALL 261
+#define INFO 262
+#define THE 263
+#define OF 264
+#define AND 265
+#define TO 266
+#define STUDENTS 267
+#define NAME 268
+#define WHOSE 269
+#define CPI 270
+#define IS 271
+#define MORE 272
+#define THAN 273
+#define UPDATE 274
+#define SET 275
+#define EQUAL 276
+#define WHERE 277
+#define HAVING 278
+#define ROLL 279
+#define NUMBER_VAL 280
+#define FULLSTOP 281
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 9 "eng2sql.y"
+
+    char* str;
+
+#line 188 "y.tab.c"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -190,37 +207,33 @@ enum yysymbol_kind_t
   YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
   YYSYMBOL_YYerror = 1,                    /* error  */
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
-  YYSYMBOL_SELECT = 3,                     /* SELECT  */
-  YYSYMBOL_FROM = 4,                       /* FROM  */
-  YYSYMBOL_ID = 5,                         /* ID  */
-  YYSYMBOL_WHERE = 6,                      /* WHERE  */
-  YYSYMBOL_AND = 7,                        /* AND  */
-  YYSYMBOL_UPDATE = 8,                     /* UPDATE  */
-  YYSYMBOL_SET = 9,                        /* SET  */
-  YYSYMBOL_VALUES = 10,                    /* VALUES  */
-  YYSYMBOL_DELETE = 11,                    /* DELETE  */
-  YYSYMBOL_DROP = 12,                      /* DROP  */
-  YYSYMBOL_DATABASE = 13,                  /* DATABASE  */
-  YYSYMBOL_CREATE = 14,                    /* CREATE  */
-  YYSYMBOL_TABLE = 15,                     /* TABLE  */
-  YYSYMBOL_EQUAL = 16,                     /* EQUAL  */
-  YYSYMBOL_TRUNCATE = 17,                  /* TRUNCATE  */
-  YYSYMBOL_18_n_ = 18,                     /* '\n'  */
-  YYSYMBOL_19_ = 19,                       /* '*'  */
-  YYSYMBOL_20_ = 20,                       /* ','  */
-  YYSYMBOL_YYACCEPT = 21,                  /* $accept  */
-  YYSYMBOL_command = 22,                   /* command  */
-  YYSYMBOL_selectCommand = 23,             /* selectCommand  */
-  YYSYMBOL_updateCommand = 24,             /* updateCommand  */
-  YYSYMBOL_dropCommand = 25,               /* dropCommand  */
-  YYSYMBOL_createCommand = 26,             /* createCommand  */
-  YYSYMBOL_tabledb = 27,                   /* tabledb  */
-  YYSYMBOL_fromClause = 28,                /* fromClause  */
-  YYSYMBOL_items = 29,                     /* items  */
-  YYSYMBOL_identifiers = 30,               /* identifiers  */
-  YYSYMBOL_whereClause = 31,               /* whereClause  */
-  YYSYMBOL_updateCondition = 32,           /* updateCondition  */
-  YYSYMBOL_condition = 33                  /* condition  */
+  YYSYMBOL_PLZ = 3,                        /* PLZ  */
+  YYSYMBOL_GIVE = 4,                       /* GIVE  */
+  YYSYMBOL_ME = 5,                         /* ME  */
+  YYSYMBOL_ALL = 6,                        /* ALL  */
+  YYSYMBOL_INFO = 7,                       /* INFO  */
+  YYSYMBOL_THE = 8,                        /* THE  */
+  YYSYMBOL_OF = 9,                         /* OF  */
+  YYSYMBOL_AND = 10,                       /* AND  */
+  YYSYMBOL_TO = 11,                        /* TO  */
+  YYSYMBOL_STUDENTS = 12,                  /* STUDENTS  */
+  YYSYMBOL_NAME = 13,                      /* NAME  */
+  YYSYMBOL_WHOSE = 14,                     /* WHOSE  */
+  YYSYMBOL_CPI = 15,                       /* CPI  */
+  YYSYMBOL_IS = 16,                        /* IS  */
+  YYSYMBOL_MORE = 17,                      /* MORE  */
+  YYSYMBOL_THAN = 18,                      /* THAN  */
+  YYSYMBOL_UPDATE = 19,                    /* UPDATE  */
+  YYSYMBOL_SET = 20,                       /* SET  */
+  YYSYMBOL_EQUAL = 21,                     /* EQUAL  */
+  YYSYMBOL_WHERE = 22,                     /* WHERE  */
+  YYSYMBOL_HAVING = 23,                    /* HAVING  */
+  YYSYMBOL_ROLL = 24,                      /* ROLL  */
+  YYSYMBOL_NUMBER_VAL = 25,                /* NUMBER_VAL  */
+  YYSYMBOL_FULLSTOP = 26,                  /* FULLSTOP  */
+  YYSYMBOL_YYACCEPT = 27,                  /* $accept  */
+  YYSYMBOL_sentence = 28,                  /* sentence  */
+  YYSYMBOL_identifier = 29                 /* identifier  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -546,21 +559,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  21
+#define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   34
+#define YYLAST   55
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  21
+#define YYNTOKENS  27
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  13
+#define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  23
+#define YYNRULES  8
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  47
+#define YYNSTATES  44
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   272
+#define YYMAXUTOK   281
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -575,10 +588,10 @@ union yyalloc
 static const yytype_int8 yytranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-      18,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,    19,     2,    20,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -601,16 +614,15 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    23,    23,    24,    25,    26,    27,    31,    35,    39,
-      43,    47,    47,    51,    55,    55,    59,    59,    63,    64,
-      68,    72,    73,    74
+       0,    29,    29,    31,    33,    35,    38,    39,    40
 };
 #endif
 
@@ -626,12 +638,10 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "SELECT", "FROM", "ID",
-  "WHERE", "AND", "UPDATE", "SET", "VALUES", "DELETE", "DROP", "DATABASE",
-  "CREATE", "TABLE", "EQUAL", "TRUNCATE", "'\\n'", "'*'", "','", "$accept",
-  "command", "selectCommand", "updateCommand", "dropCommand",
-  "createCommand", "tabledb", "fromClause", "items", "identifiers",
-  "whereClause", "updateCondition", "condition", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "PLZ", "GIVE", "ME",
+  "ALL", "INFO", "THE", "OF", "AND", "TO", "STUDENTS", "NAME", "WHOSE",
+  "CPI", "IS", "MORE", "THAN", "UPDATE", "SET", "EQUAL", "WHERE", "HAVING",
+  "ROLL", "NUMBER_VAL", "FULLSTOP", "$accept", "sentence", "identifier", YY_NULLPTR
 };
 
 static const char *
@@ -641,7 +651,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-40)
+#define YYPACT_NINF (-16)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -655,11 +665,11 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -3,    -4,    -2,    -5,    -5,   -11,     7,    -6,    -1,     0,
-       1,    -7,   -40,    12,   -40,    11,   -40,   -40,    16,    17,
-      18,   -40,   -40,   -40,   -40,   -40,    19,    20,    21,    23,
-     -40,   -40,   -40,   -40,   -40,    24,   -40,    25,   -40,    10,
-     -40,    24,    27,   -40,    26,    24,   -40
+       3,    -4,     8,     4,     2,   -16,    -1,     1,     7,   -12,
+       9,    10,   -16,   -16,    11,    12,    13,     5,    15,   -11,
+      14,   -15,    16,   -16,    18,     6,   -16,    -2,    19,    17,
+     -16,    20,     0,    21,    22,    23,    24,    25,    26,    27,
+     -16,    28,    29,   -16
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -667,25 +677,23 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    16,    14,     0,    15,     0,    12,    11,     0,     0,
-       0,     1,     2,     3,     4,     5,     0,     0,    19,     0,
-       9,    10,     6,    17,    13,    23,     7,     0,     8,     0,
-      18,    23,     0,    20,    21,    23,    22
+       0,     0,     0,     0,     0,     1,     0,     0,     0,     0,
+       0,     0,     8,     7,     6,     0,     0,     0,     0,     0,
+       0,     0,     0,     6,     0,     0,     2,     0,     0,     0,
+       5,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       4,     0,     0,     3
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -40,   -40,   -40,   -40,   -40,   -40,    30,   -40,   -40,     4,
-     -40,   -40,   -39
+     -16,   -16,    31
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     6,     7,     8,     9,    10,    18,    28,    13,    14,
-      36,    38,    40
+       0,     2,    15
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -693,45 +701,45 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,    11,    43,    15,    20,     2,    46,    21,    16,     3,
-      17,     4,    22,    26,     5,    12,    27,    23,    24,    25,
-      29,    30,    31,    32,    11,    34,    42,    35,    37,    39,
-      33,    41,    44,    45,    19
+       3,    12,    12,    13,    13,     8,     1,     9,     5,     6,
+       7,    26,    14,    23,    11,     4,    10,    21,    16,    17,
+      18,    20,    19,    22,    30,    34,    25,    28,    27,    29,
+       0,    31,     0,    36,    33,     0,    35,     0,     0,    37,
+       0,    32,    39,     0,     0,    41,     0,     0,     0,    38,
+      24,     0,    40,    42,     0,    43
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,     5,    41,     5,    15,     8,    45,     0,    13,    12,
-      15,    14,    18,    20,    17,    19,     4,    18,    18,    18,
-       9,     5,     5,     5,     5,     5,    16,     6,     5,     5,
-      26,     6,     5,     7,     4
+       4,    13,    13,    15,    15,     6,     3,     8,     0,     5,
+       8,    26,    24,    24,     7,    19,    15,    12,     9,     9,
+       9,     8,    10,     8,    26,    25,    12,     9,    12,    23,
+      -1,    12,    -1,    11,    14,    -1,    15,    -1,    -1,    16,
+      -1,    24,    17,    -1,    -1,    18,    -1,    -1,    -1,    25,
+      19,    -1,    26,    25,    -1,    26
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,     8,    12,    14,    17,    22,    23,    24,    25,
-      26,     5,    19,    29,    30,     5,    13,    15,    27,    27,
-      15,     0,    18,    18,    18,    18,    20,     4,    28,     9,
-       5,     5,     5,    30,     5,     6,    31,     5,    32,     5,
-      33,     6,    16,    33,     5,     7,    33
+       0,     3,    28,     4,    19,     0,     5,     8,     6,     8,
+      15,     7,    13,    15,    24,    29,     9,     9,     9,    10,
+       8,    12,     8,    24,    29,    12,    26,    12,     9,    23,
+      26,    12,    24,    14,    25,    15,    11,    16,    25,    17,
+      26,    18,    25,    26
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    21,    22,    22,    22,    22,    22,    23,    24,    25,
-      26,    27,    27,    28,    29,    29,    30,    30,    31,    31,
-      32,    33,    33,    33
+       0,    27,    28,    28,    28,    28,    29,    29,    29
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     2,     2,     2,     2,     3,     4,     4,     3,
-       3,     1,     1,     2,     1,     1,     1,     3,     2,     0,
-       3,     3,     5,     0
+       0,     2,     8,    16,    13,     9,     1,     1,     1
 };
 
 
@@ -1194,74 +1202,32 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* command: selectCommand '\n'  */
-#line 23 "sql.y"
-                       { printf("HELLO Select Command\n"); return 0; }
-#line 1201 "y.tab.c"
+  case 2: /* sentence: PLZ GIVE ME ALL INFO OF STUDENTS FULLSTOP  */
+#line 30 "eng2sql.y"
+           { printf("SELECT * FROM Students;\n"); }
+#line 1209 "y.tab.c"
     break;
 
-  case 3: /* command: updateCommand '\n'  */
-#line 24 "sql.y"
-                       { printf("Update Command\n"); return 0; }
-#line 1207 "y.tab.c"
+  case 3: /* sentence: PLZ GIVE ME THE identifier AND identifier OF STUDENTS WHOSE CPI IS MORE THAN NUMBER_VAL FULLSTOP  */
+#line 32 "eng2sql.y"
+           { printf("SELECT %s, %s FROM Students WHERE cpi > %s;", (yyvsp[-11].str), (yyvsp[-9].str),(yyvsp[-1].str)); }
+#line 1215 "y.tab.c"
     break;
 
-  case 4: /* command: dropCommand '\n'  */
-#line 25 "sql.y"
-                     { printf("Drop Command\n"); return 0; }
-#line 1213 "y.tab.c"
+  case 4: /* sentence: PLZ UPDATE THE CPI OF THE STUDENTS HAVING ROLL NUMBER_VAL TO NUMBER_VAL FULLSTOP  */
+#line 34 "eng2sql.y"
+           { printf("UPDATE Students SET cpi=%s where roll=%s",(yyvsp[-1].str),(yyvsp[-3].str)); }
+#line 1221 "y.tab.c"
     break;
 
-  case 5: /* command: createCommand '\n'  */
-#line 26 "sql.y"
-                       { printf("CREATE Command\n"); return 0; }
-#line 1219 "y.tab.c"
+  case 5: /* sentence: PLZ GIVE ME THE ROLL OF THE STUDENTS FULLSTOP  */
+#line 36 "eng2sql.y"
+           { printf("SELECT roll FROM Students;\n"); }
+#line 1227 "y.tab.c"
     break;
 
-  case 6: /* command: TRUNCATE TABLE ID  */
-#line 27 "sql.y"
-                      { printf("TRUNCATE Command\n"); return 0;}
-#line 1225 "y.tab.c"
-    break;
 
-  case 7: /* selectCommand: SELECT items fromClause whereClause  */
-#line 31 "sql.y"
-                                        {printf("In Select");}
 #line 1231 "y.tab.c"
-    break;
-
-  case 8: /* updateCommand: UPDATE ID SET updateCondition  */
-#line 35 "sql.y"
-                                  {printf("In Update");}
-#line 1237 "y.tab.c"
-    break;
-
-  case 13: /* fromClause: FROM ID  */
-#line 51 "sql.y"
-            {printf("In from");}
-#line 1243 "y.tab.c"
-    break;
-
-  case 18: /* whereClause: WHERE condition  */
-#line 63 "sql.y"
-                    {printf("In where");}
-#line 1249 "y.tab.c"
-    break;
-
-  case 20: /* updateCondition: ID WHERE condition  */
-#line 68 "sql.y"
-                       {printf("In Update Condition");}
-#line 1255 "y.tab.c"
-    break;
-
-  case 21: /* condition: ID EQUAL ID  */
-#line 72 "sql.y"
-                {printf("In update condition");}
-#line 1261 "y.tab.c"
-    break;
-
-
-#line 1265 "y.tab.c"
 
       default: break;
     }
@@ -1454,6 +1420,14 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 77 "sql.y"
+#line 42 "eng2sql.y"
 
 
+void yyerror(const char *s) {
+  fprintf(stderr, "Error: %s\n", s);
+}
+
+int main() {
+  yyparse();
+  return 0;
+}

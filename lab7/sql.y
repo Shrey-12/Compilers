@@ -16,14 +16,15 @@ int main() {
 }
 %}
 
-%token SELECT FROM ID WHERE AND UPDATE SET VALUES DELETE DROP DATABASE CREATE TABLE EQUAL;
+%token SELECT FROM ID WHERE AND UPDATE SET VALUES DELETE DROP DATABASE CREATE TABLE EQUAL TRUNCATE;
 
 %%
 command:
     selectCommand '\n' { printf("HELLO Select Command\n"); return 0; } |
     updateCommand '\n' { printf("Update Command\n"); return 0; } |
     dropCommand '\n' { printf("Drop Command\n"); return 0; } |
-    createCommand '\n' { printf("CREATE Command\n"); return 0; }
+    createCommand '\n' { printf("CREATE Command\n"); return 0; } |
+    TRUNCATE TABLE ID { printf("TRUNCATE Command\n"); return 0;}
     ;
 
 selectCommand:
@@ -64,7 +65,7 @@ whereClause:
     ;
 
 updateCondition:
-    ID WHERE condition {printf("In Update Condition");}
+    condition WHERE condition {printf("In Update Condition");}
     ;
 
 condition:

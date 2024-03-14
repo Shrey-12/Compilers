@@ -1,7 +1,8 @@
 %{ 
 	/* Definition section*/
 	#include "y.tab.h" 
-	extern int yylval;
+	extern yylval;
+	int yywrap(){return 1;}
 %}
 
 %% 

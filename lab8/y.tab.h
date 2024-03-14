@@ -54,21 +54,30 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    SELECT = 258,                  /* SELECT  */
-    FROM = 259,                    /* FROM  */
-    ID = 260,                      /* ID  */
-    WHERE = 261,                   /* WHERE  */
-    AND = 262,                     /* AND  */
-    UPDATE = 263,                  /* UPDATE  */
-    SET = 264,                     /* SET  */
-    VALUES = 265,                  /* VALUES  */
-    DELETE = 266,                  /* DELETE  */
-    DROP = 267,                    /* DROP  */
-    DATABASE = 268,                /* DATABASE  */
-    CREATE = 269,                  /* CREATE  */
-    TABLE = 270,                   /* TABLE  */
-    EQUAL = 271,                   /* EQUAL  */
-    TRUNCATE = 272                 /* TRUNCATE  */
+    PLZ = 258,                     /* PLZ  */
+    GIVE = 259,                    /* GIVE  */
+    ME = 260,                      /* ME  */
+    ALL = 261,                     /* ALL  */
+    INFO = 262,                    /* INFO  */
+    THE = 263,                     /* THE  */
+    OF = 264,                      /* OF  */
+    AND = 265,                     /* AND  */
+    TO = 266,                      /* TO  */
+    STUDENTS = 267,                /* STUDENTS  */
+    NAME = 268,                    /* NAME  */
+    WHOSE = 269,                   /* WHOSE  */
+    CPI = 270,                     /* CPI  */
+    IS = 271,                      /* IS  */
+    MORE = 272,                    /* MORE  */
+    THAN = 273,                    /* THAN  */
+    UPDATE = 274,                  /* UPDATE  */
+    SET = 275,                     /* SET  */
+    EQUAL = 276,                   /* EQUAL  */
+    WHERE = 277,                   /* WHERE  */
+    HAVING = 278,                  /* HAVING  */
+    ROLL = 279,                    /* ROLL  */
+    NUMBER_VAL = 280,              /* NUMBER_VAL  */
+    FULLSTOP = 281                 /* FULLSTOP  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -77,25 +86,43 @@ extern int yydebug;
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
-#define SELECT 258
-#define FROM 259
-#define ID 260
-#define WHERE 261
-#define AND 262
-#define UPDATE 263
-#define SET 264
-#define VALUES 265
-#define DELETE 266
-#define DROP 267
-#define DATABASE 268
-#define CREATE 269
-#define TABLE 270
-#define EQUAL 271
-#define TRUNCATE 272
+#define PLZ 258
+#define GIVE 259
+#define ME 260
+#define ALL 261
+#define INFO 262
+#define THE 263
+#define OF 264
+#define AND 265
+#define TO 266
+#define STUDENTS 267
+#define NAME 268
+#define WHOSE 269
+#define CPI 270
+#define IS 271
+#define MORE 272
+#define THAN 273
+#define UPDATE 274
+#define SET 275
+#define EQUAL 276
+#define WHERE 277
+#define HAVING 278
+#define ROLL 279
+#define NUMBER_VAL 280
+#define FULLSTOP 281
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 9 "eng2sql.y"
+
+    char* str;
+
+#line 123 "y.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
